@@ -1,5 +1,5 @@
 .taksapp-wrapper {
-  @apply bg-background-200 p-8 w-fit mt-8 mx-auto rounded-lg;
+  @apply bg-background-200 px-8 pt-8 pb-4 w-fit mt-8 mx-auto rounded-lg;
 }
 
 .title {
@@ -23,5 +23,25 @@
 
   button {
     @apply bg-background-400 px-2 rounded-lg mx-2;
+  }
+}
+
+.tasklist {
+  @apply bg-slate-50 h-[166px] overflow-scroll p-2 my-3 flex flex-col align-top gap-2 rounded-lg;
+
+  li {
+    @apply bg-background-300 py-1 px-2 rounded-lg flex justify-start items-center;
+  }
+
+  input {
+    @apply mr-2;
+  }
+
+  label {
+    @apply flex-1;
+  }
+
+  svg {
+    @apply w-4 cursor-pointer;
   }
 }
