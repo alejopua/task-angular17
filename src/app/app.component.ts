@@ -20,4 +20,16 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.tasksList = this._taskService.getTasks();
   }
+
+  deleteTask(taskIndex: number): void {
+    console.log('deleteTask', taskIndex);
+    this._taskService.deleteTask(taskIndex);
+    this.tasksList = this._taskService.getTasks();
+  }
+
+  addTask(newTask: string): void {
+    this._taskService.addTask(newTask);
+    this.newTask = '';
+    this.tasksList = this._taskService.getTasks();
+  }
 }
