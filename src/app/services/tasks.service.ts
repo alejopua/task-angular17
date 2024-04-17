@@ -18,9 +18,9 @@ export class TasksService {
     localStorage.setItem(this.lStorageKey, JSON.stringify(tasks));
   }
 
-  deleteTask(task: string) {
+  deleteTask(taskIndex: number) {
     const tasks = this.getTasks();
-    tasks.splice(task, 1);
+    tasks.splice(taskIndex, 1);
     localStorage.setItem(this.lStorageKey, JSON.stringify(tasks));
   }
 }
