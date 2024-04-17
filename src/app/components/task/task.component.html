@@ -1,0 +1,25 @@
+<section class="taksapp-wrapper">
+  <h1 class="title">TASK WORKS</h1>
+
+  <div class="newtask">
+    <input type="text" placeholder="Add new task" />
+    <button>+</button>
+  </div>
+
+  <div class="filters">
+    <button>All</button>
+    <button>Done</button>
+    <button>Pending</button>
+  </div>
+
+  <ul>
+    <li *ngFor="let task of tasksList; let i = index">
+      <input type="checkbox" name="" id="" />
+      <label for="">Titulo tarea</label>
+      <button>Edit</button>
+      <button (click)="deleteTask(i)">Delete</button>
+    </li>
+    <input type="text" placeholder="Add new task" [(ngModel)]="newTask" />
+    <button (click)="addTask(newTask)">Add task</button>
+  </ul>
+</section>
