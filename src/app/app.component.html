@@ -1,11 +1,1 @@
-<div>
-  <h1 class="text-3xl font-bold underline">Hello world!</h1>
-  <ul>
-    <li *ngFor="let task of tasksList; let i = index">
-      {{ task }}
-      <button (click)="deleteTask(i)">Delete</button>
-    </li>
-    <input type="text" placeholder="Add new task" [(ngModel)]="newTask" />
-    <button (click)="addTask(newTask)">Add task</button>
-  </ul>
-</div>
+<router-outlet></router-outlet>
