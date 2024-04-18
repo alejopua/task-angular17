@@ -36,7 +36,7 @@
   <ul class="tasklist">
     @for (task of tasksList(); track task.id) {
     <li>
-      <input type="checkbox" />
+      <input type="checkbox" [checked]="task.done" />
       <label>{{ task.name }}</label>
       <button>
         <svg
