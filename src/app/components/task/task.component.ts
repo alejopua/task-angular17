@@ -39,11 +39,23 @@ export class TaskComponent {
     this.tasksList = this._taskService.getTasks();
   }
 
-  addTask(newTask: string): void {
-    const taskInput = this.newTask.value;
+  addTask() {
+    const taskInput = this.newTask.value.trim();
     console.log('addTask', taskInput);
-    // this._taskService.addTask(newTask);
-    // this.newTask = '';
-    // this.tasksList = this._taskService.getTasks();
+    if (this.newTask.valid && taskInput !== '') {
+      this.tasksList.update((prev_tasks) => {
+        return [
+          ...prev_tasks,
+          {
+            id: prev_tasks.length + 1,
+            name: taskInput,
+            done: false,
+          },
+        ];
+      });
+      this.newTask.reset();
+    } else {
+      this.newTask.reset();
+    }
   }
 }
