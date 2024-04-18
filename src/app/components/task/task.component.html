@@ -2,7 +2,12 @@
   <h1 class="title">TASK WORKS</h1>
 
   <div class="newtask">
-    <input type="text" placeholder="Add new task" [formControl]="newTask" />
+    <input
+      type="text"
+      (keydown)="addTask()"
+      placeholder="Add new task"
+      [formControl]="newTask"
+    />
     <button (click)="addTask()">+</button>
   </div>
 
