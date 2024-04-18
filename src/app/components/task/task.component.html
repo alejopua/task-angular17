@@ -41,7 +41,7 @@
         [checked]="task.done"
         (click)="toggleTask(task.id)"
       />
-      <label>{{ task.name }}</label>
+      <label [class.check]="task.done === true">{{ task.name }}</label>
       <button>
         <svg
           xmlns="http://www.w3.org/2000/svg"
