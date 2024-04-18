@@ -28,6 +28,10 @@ export class TaskComponent implements OnInit {
     this.tasksList = this._taskService.getTasks();
   }
 
+  changeFilter(filterString: FilterType) {
+    this.filterTask.set(filterString);
+  }
+
   deleteTask(taskIndex: number): void {
     console.log('deleteTask', taskIndex);
     this._taskService.deleteTask(taskIndex);
