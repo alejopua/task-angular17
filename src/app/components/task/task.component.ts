@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, effect, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FilterType, TaskModel } from '../models/task';
@@ -10,7 +10,7 @@ import { FilterType, TaskModel } from '../models/task';
   templateUrl: './task.component.html',
   styleUrl: './task.component.css',
 })
-export class TaskComponent {
+export class TaskComponent implements OnInit {
   tasksList = signal<TaskModel[]>([
     { id: 1, name: 'Run', done: false },
     { id: 2, name: 'Swim', done: false },
@@ -37,6 +37,19 @@ export class TaskComponent {
         return tasks;
     }
   });
+
+  constructor() {
+    effect(() => {
+      localStorage.setItem('tasksList', JSON.stringify(this.tasksList()));
+    });
+  }
+
+  ngOnInit(): void {
+    const storage = localStorage.getItem('tasksList');
+    if (storage) {
+      this.tasksList.set(JSON.parse(storage));
+    }
+  }
 
   changeFilter(filterString: FilterType) {
     this.filterTask.set(filterString);
