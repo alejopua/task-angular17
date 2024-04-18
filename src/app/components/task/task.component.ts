@@ -1,5 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
-import { TasksService } from '../../services/tasks.service';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FilterType, TaskModel } from '../models/task';
@@ -24,10 +23,6 @@ export class TaskComponent {
     nonNullable: true,
     validators: [Validators.required, Validators.minLength(3)],
   });
-
-  private _taskService = inject(TasksService);
-
-  // this.tasksList = this._taskService.getTasks();
 
   changeFilter(filterString: FilterType) {
     this.filterTask.set(filterString);
