@@ -1,17 +1,17 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { TasksService } from '../../services/tasks.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FilterType, TaskModel } from '../models/task';
 
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './task.component.html',
   styleUrl: './task.component.css',
 })
-export class TaskComponent implements OnInit {
+export class TaskComponent {
   tasksList = signal<TaskModel[]>([
     { id: 1, name: 'Run', done: false },
     { id: 2, name: 'Swim', done: false },
@@ -20,13 +20,14 @@ export class TaskComponent implements OnInit {
 
   filterTask = signal<FilterType>('all');
 
-  newTask: string = '';
+  newTask = new FormControl('', {
+    nonNullable: true,
+    validators: [Validators.required, Validators.minLength(3)],
+  });
 
   private _taskService = inject(TasksService);
 
-  ngOnInit(): void {
-    this.tasksList = this._taskService.getTasks();
-  }
+  // this.tasksList = this._taskService.getTasks();
 
   changeFilter(filterString: FilterType) {
     this.filterTask.set(filterString);
@@ -39,8 +40,10 @@ export class TaskComponent implements OnInit {
   }
 
   addTask(newTask: string): void {
-    this._taskService.addTask(newTask);
-    this.newTask = '';
-    this.tasksList = this._taskService.getTasks();
+    const taskInput = this.newTask.value;
+    console.log('addTask', taskInput);
+    // this._taskService.addTask(newTask);
+    // this.newTask = '';
+    // this.tasksList = this._taskService.getTasks();
   }
 }
