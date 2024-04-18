@@ -2,21 +2,38 @@
   <h1 class="title">TASK WORKS</h1>
 
   <div class="newtask">
-    <input type="text" placeholder="Add new task" [(ngModel)]="newTask" />
-    <button (click)="addTask(newTask)">+</button>
+    <input type="text" placeholder="Add new task" [formControl]="newTask" />
+    <button (click)="addTask()">+</button>
   </div>
 
   <div class="filters">
-    <button>All</button>
-    <button>Done</button>
-    <button>Pending</button>
+    <button
+      (click)="changeFilter('all')"
+      [class.active]="filterTask() === 'all'"
+    >
+      All
+    </button>
+    <button
+      (click)="changeFilter('done')"
+      [class.active]="filterTask() === 'done'"
+    >
+      Done
+    </button>
+
+    <button
+      (click)="changeFilter('pending')"
+      [class.active]="filterTask() === 'pending'"
+    >
+      Pending
+    </button>
   </div>
 
   <ul class="tasklist">
-    <li *ngFor="let task of tasksList; let i = index">
-      <input type="checkbox" name="" id="" />
-      <label for="">Titulo tarea</label>
-      <button (click)="deleteTask(i)">
+    @for (task of tasksList(); track task.id) {
+    <li>
+      <input type="checkbox" />
+      <label>{{ task.name }}</label>
+      <button>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -33,5 +50,6 @@
         </svg>
       </button>
     </li>
+    }
   </ul>
 </section>
