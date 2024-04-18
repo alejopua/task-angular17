@@ -33,10 +33,12 @@ export class TaskComponent {
     this.filterTask.set(filterString);
   }
 
-  deleteTask(taskIndex: number): void {
-    console.log('deleteTask', taskIndex);
-    this._taskService.deleteTask(taskIndex);
-    this.tasksList = this._taskService.getTasks();
+  deleteTask(taskID: number) {
+    return this.tasksList.update((prev_tasks) => {
+      return prev_tasks.filter((task) => {
+        return task.id !== taskID;
+      });
+    });
   }
 
   addTask() {
@@ -47,7 +49,7 @@ export class TaskComponent {
         return [
           ...prev_tasks,
           {
-            id: prev_tasks.length + 1,
+            id: Date.now(),
             name: taskInput,
             done: false,
           },
