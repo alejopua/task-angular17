@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FilterType, TaskModel } from '../models/task';
@@ -22,6 +22,20 @@ export class TaskComponent {
   newTask = new FormControl('', {
     nonNullable: true,
     validators: [Validators.required, Validators.minLength(3)],
+  });
+
+  taskFiltered = computed(() => {
+    const filter = this.filterTask();
+    const tasks = this.tasksList();
+
+    switch (filter) {
+      case 'done':
+        return tasks.filter((task) => task.done);
+      case 'pending':
+        return tasks.filter((task) => !task.done);
+      default:
+        return tasks;
+    }
   });
 
   changeFilter(filterString: FilterType) {
