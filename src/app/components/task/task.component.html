@@ -34,7 +34,7 @@
   </div>
 
   <ul class="tasklist">
-    @for (task of tasksList(); track task.id) {
+    @for (task of taskFiltered(); track task.id) {
     <li>
       <input
         type="checkbox"
