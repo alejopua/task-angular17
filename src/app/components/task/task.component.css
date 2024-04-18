@@ -24,6 +24,10 @@
   button {
     @apply bg-background-400 px-2 rounded-lg mx-2;
   }
+
+  button.active {
+    @apply bg-green-900;
+  }
 }
 
 .tasklist {
