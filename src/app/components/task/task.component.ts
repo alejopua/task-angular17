@@ -58,4 +58,12 @@ export class TaskComponent {
       this.newTask.reset();
     }
   }
+
+  toggleTask(taskID: number) {
+    return this.tasksList.update((prev_tasks) =>
+      prev_tasks.map((task) => {
+        return task.id === taskID ? { ...task, done: !task.done } : task;
+      })
+    );
+  }
 }
