@@ -1,4 +1,4 @@
-export interface TaksModel {
+export interface TaskModel {
   id: number;
   name: string;
   done: boolean;
