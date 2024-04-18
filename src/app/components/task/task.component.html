@@ -4,7 +4,7 @@
   <div class="newtask">
     <input
       type="text"
-      (keydown)="addTask()"
+      (keyup.enter)="addTask()"
       placeholder="Add new task"
       [formControl]="newTask"
     />
@@ -42,7 +42,7 @@
         (click)="toggleTask(task.id)"
       />
       <label [class.check]="task.done === true">{{ task.name }}</label>
-      <button>
+      <button (click)="deleteTask(task.id)">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
