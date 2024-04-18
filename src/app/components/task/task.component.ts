@@ -1,7 +1,8 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { TasksService } from '../../services/tasks.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { FilterType, TaskModel } from '../models/task';
 
 @Component({
   selector: 'app-task',
@@ -11,7 +12,14 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './task.component.css',
 })
 export class TaskComponent implements OnInit {
-  tasksList: string[] = [];
+  tasksList = signal<TaskModel[]>([
+    { id: 1, name: 'Run', done: false },
+    { id: 2, name: 'Swim', done: false },
+    { id: 3, name: 'Dance', done: false },
+  ]);
+
+  filterTask = signal<FilterType>('all');
+
   newTask: string = '';
 
   private _taskService = inject(TasksService);
